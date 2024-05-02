@@ -7,18 +7,20 @@ const puppeteer = require('puppeteer');
     const URL = 'https://pptr.dev/';
     await page.goto(URL);
 
-    const allArticles = await page.evaluate(() => {
-       const article = document.querySelectorAll('article');
+    const allClasses = await page.evaluate(() => {
+        const elements = document.querySelectorAll('*');
+        const classesSet = new Set();
 
+        elements.forEach(element => {
+            if (element.classList.length > 0) {
+                element.classList.forEach(cls => classesSet.add(cls));
+            }
+        });
 
-       return Array.from(article).slice(0, 5).map((article) => {
-           // const div = article.querySelector('div');
-           const h1 = article.querySelector('h1').innerText;
-           const h2 = article.querySelector('h2').innerText;
-           return {h1, h2};
-       });
+        return Array.from(classesSet);
     });
-    console.log(allArticles);
+
+    console.log('Усі класи елементів на сторінці:', allClasses);
 
     await browser.close();
 })();

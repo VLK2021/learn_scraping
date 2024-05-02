@@ -1,7 +1,16 @@
 const puppeteer = require('puppeteer');
+const fs = require('fs');
+const path = require('path');
+
+const dirPath = path.join(process.cwd(), 'data');
+const filePath = path.join(dirPath, 'classesArray.txt');
+
+// Перевірка наявності папки та створення, якщо вона не існує
+if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+}
 
 (async () => {
-
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
@@ -21,7 +30,15 @@ const puppeteer = require('puppeteer');
         return Array.from(classesSet);
     });
 
-    console.log('Усі класи елементів на сторінці:', allClasses);
+    const jsonClasses = JSON.stringify(allClasses);
+
+    fs.writeFile(filePath, jsonClasses, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('Файл успішно записаний.');
+        }
+    });
 
     await browser.close();
 })();

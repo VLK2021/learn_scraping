@@ -12,9 +12,9 @@ const puppeteer = require('puppeteer');
 
 
        return Array.from(article).slice(0, 5).map((article) => {
-           const div = article.querySelector('div');
-           const h1 = div.querySelector('h1').innerText;
-           const h2 = div.querySelector('h2').innerText;
+           // const div = article.querySelector('div');
+           const h1 = article.querySelector('h1').innerText;
+           const h2 = article.querySelector('h2').innerText;
            return {h1, h2};
        });
     });

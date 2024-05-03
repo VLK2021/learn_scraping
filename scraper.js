@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
 
+
 const dirPath = path.join(process.cwd(), 'data');
 const filePath = path.join(dirPath, 'classesArray.txt');
 

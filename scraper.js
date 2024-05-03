@@ -6,6 +6,7 @@ const path = require('path');
 const dirPath = path.join(process.cwd(), 'data');
 const filePath = path.join(dirPath, 'classesArray.txt');
 
+
 // Перевірка наявності папки та створення, якщо вона не існує
 if (!fs.existsSync(dirPath)) {
     fs.mkdirSync(dirPath, { recursive: true });
